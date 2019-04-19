@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  # Selenium hub
+  selenium_hub:
+    image: selenium/hub:3.14.0-curium
+    ports:
+      - 4444:4444
+  device_HT76V0202944:
+    image: nesh/device_with_appium:latest
+    restart: unless-stopped
+    depends_on:
+      - selenium_hub
+    ports:
+      - 4723:4723
+    privileged: true
+    volumes:
+      - ~/.android:/root/.android
+    environment:
+      - CONNECT_TO_GRID=true
+      - SELENIUM_HOST=selenium_hub
+      - REMOTE_ADB=true
+      - ANDROID_DEVICES=HT76V0202944
+      - REMOTE_ADB_POLLING_SEC=60:      
