@@ -3,7 +3,8 @@ version: '2'
 services:
   # Selenium hub
   selenium_hub:
-    image: selenium/hub:3.14.0-curium
+    #image: selenium/hub:3.9.0
+    image: selenium/hub:latest 
     ports:
       - 4444:4444
         #device_041604952fb8090222222:
@@ -25,7 +26,7 @@ services:
         #      - ANDROID_DEVICES=041604952fb809022222
         #      - REMOTE_ADB_POLLING_SEC=60
   device_041604952fb80902:
-    image: nesh/device_with_appium:2.1      
+    image: nesh/device_with_appium:2.1   
           #    image: 09174097ea59
     restart: unless-stopped
     depends_on:
@@ -150,7 +151,7 @@ services:
       - REMOTE_ADB_POLLING_SEC=60
       - RELAXED_SECURITY=true       
 
-  device_8C3X1H9U8:
+  device_9e44a32d:
     image: nesh/device_with_appium:2.1
           #    image: 09174097ea59
     restart: unless-stopped
@@ -167,7 +168,7 @@ services:
       - CONNECT_TO_GRID=true
       - SELENIUM_HOST=selenium_hub
       - REMOTE_ADB=true
-      - ANDROID_DEVICES=8C3X1H9U8
+      - ANDROID_DEVICES=9e44a32d
       - REMOTE_ADB_POLLING_SEC=60
       - RELAXED_SECURITY=true  
 
@@ -231,5 +232,26 @@ services:
       - SELENIUM_HOST=selenium_hub
       - REMOTE_ADB=true
       - ANDROID_DEVICES=5200c2a2437d26fb
+      - REMOTE_ADB_POLLING_SEC=60
+      - RELAXED_SECURITY=true
+
+  device_882HADTB6EW9H:
+    image: nesh/device_with_appium:2.1
+          #    image: 09174097ea59
+    restart: unless-stopped
+    depends_on:
+      - selenium_hub
+    ports:
+      - 4833:4723
+    privileged: true
+    volumes:
+      - ~/.android:/root/.android
+    environment:
+      - PUBLIC_IP=${PUBLIC_IP}
+      - STF_TOKEN=${STF_TOKEN}
+      - CONNECT_TO_GRID=true
+      - SELENIUM_HOST=selenium_hub
+      - REMOTE_ADB=true
+      - ANDROID_DEVICES=882HADTB6EW9H
       - REMOTE_ADB_POLLING_SEC=60
       - RELAXED_SECURITY=true        
