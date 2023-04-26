@@ -7,7 +7,7 @@ if [ ! -z "$ANDROID_DEVICES" ]; then
       -H 'Authorization: Bearer '"$STF_TOKEN" \
       -H 'Content-Type: application/json' \
       -d '{"serial":"'$ANDROID_DEVICES'"}'
-    response=$(curl -s -X GET   http://$PUBLIC_IP/api/v1/devices/$ANDROID_DEVICES   -H 'Authorization: Bearer '"$STF_TOKEN")
+    response=$(curl -s -X GET   http://$PUBLIC_IP:7100/api/v1/devices/$ANDROID_DEVICES   -H 'Authorization: Bearer '"$STF_TOKEN")
     echo $response
     connect_url=$( jq -r .device.remoteConnectUrl <<< "${response}" )
     echo ${connect_url}
