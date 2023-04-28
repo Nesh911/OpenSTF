@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_CONFIG_JSON="/root/nodeconfig.json"
+NODE_CONFIG_JSON="./nodeconfig.json"
 APPIUM_LOG="/var/log/appium.log"
 CMD="xvfb-run appium --log $APPIUM_LOG"
 
@@ -12,12 +12,12 @@ if [ ! -z "${SALT_MASTER}" ]; then
 fi
 
 if [ "$REMOTE_ADB" = true ]; then
-    /root/wireless_connect.sh
+    ./appium-docker-android/wireless_connect.sh
 fi
 sleep 5
 if [ "$CONNECT_TO_GRID" = true ]; then
     if [ "$CUSTOM_NODE_CONFIG" != true ]; then
-        /root/generate_config.sh $NODE_CONFIG_JSON
+        ./appium-docker-android/generate_config.sh $NODE_CONFIG_JSON
     fi
     CMD+=" --nodeconfig $NODE_CONFIG_JSON"
 fi

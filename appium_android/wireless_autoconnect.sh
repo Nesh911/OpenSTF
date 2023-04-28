@@ -11,7 +11,7 @@ if [ ! -z "$REMOTE_ADB" ]; then
         do
             #to avoid immediate run
             sleep ${REMOTE_ADB_POLLING_SEC}
-            /root/wireless_connect.sh
+            ./appium-docker-android/wireless_connect.sh
         done
     }
 

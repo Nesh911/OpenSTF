@@ -3,7 +3,7 @@
 #ANDROID_DEVICES="011f6a709805"
 if [ ! -z "$ANDROID_DEVICES" ]; then
     curl -X POST \
-      http://$PUBLIC_IP/api/v1/user/devices \
+      http://$PUBLIC_IP:7100/api/v1/user/devices \
       -H 'Authorization: Bearer '"$STF_TOKEN" \
       -H 'Content-Type: application/json' \
       -d '{"serial":"'$ANDROID_DEVICES'"}'
